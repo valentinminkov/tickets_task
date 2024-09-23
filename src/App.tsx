@@ -34,15 +34,22 @@ function App() {
 
   useEffect(() => {
     const fetchTicketsData = async () => {
-      const ticketsData = await getMockTicketsData();
-      const ticketTypes = await getMockTicketTypesData();
+      try {
+        const [data, types] = await Promise.all([
+          getMockTicketsData(),
+          getMockTicketTypesData(),
+        ]);
 
-      const tickets: TicketProp[] = ticketsData.map((ticket) =>
-        formatTicket(ticket, ticketTypes)
-      );
-      setFullTicketsData(tickets);
-      setTicketTypes(ticketTypes);
-      setTicketsData(tickets);
+        const formattedTickets: TicketProp[] = data.map((ticket) =>
+          formatTicket(ticket, types)
+        );
+
+        setFullTicketsData(formattedTickets);
+        setTicketTypes(types);
+        setTicketsData(formattedTickets);
+      } catch (error) {
+        console.error("error fetching tickets data:", error);
+      }
     };
 
     fetchTicketsData();
@@ -107,7 +114,10 @@ function App() {
           <div>
             <h1 style={{ color: "magenta" }}> {ticketsData.length} tickets </h1>
             {ticketsData.map((ticket) => (
-              <div onClick={() => ticket.id && setExpandedTicketId(ticket.id)}>
+              <div
+                key={ticket.id?.toString()}
+                onClick={() => ticket.id && setExpandedTicketId(ticket.id)}
+              >
                 <Ticket
                   ticket={ticket}
                   isExpanded={expandedTicketId === ticket.id}
