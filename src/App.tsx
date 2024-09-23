@@ -91,6 +91,37 @@ function App() {
     setTicketsData(filteredTickets);
   };
 
+  const onChangeStatus = (tickedId: Number, currentStatus: String) => {
+    const allTickets: TicketProp[] = JSON.parse(
+      JSON.stringify(fullTicketsData)
+    );
+    let newStatus: string | undefined;
+    const ticketIndexToUpdate = allTickets.findIndex(
+      (ticket) => ticket.id === tickedId
+    );
+
+    switch (currentStatus) {
+      case "Open":
+        newStatus = "In Progress";
+        break;
+      case "In Progress":
+        newStatus = "Closed";
+        break;
+      case "Closed":
+        newStatus = "Open";
+        break;
+      default:
+        newStatus = "Open";
+        break;
+    }
+
+    if (!newStatus || ticketIndexToUpdate < 0) return;
+
+    allTickets[ticketIndexToUpdate].status = newStatus;
+    setTicketsData(allTickets);
+    setFullTicketsData(allTickets);
+  };
+
   return (
     <div className="App">
       <div>
@@ -120,6 +151,7 @@ function App() {
                 <Ticket
                   ticket={ticket}
                   isExpanded={expandedTicketId === ticket.id}
+                  onChangeStatus={onChangeStatus}
                 />
               </div>
             ))}

@@ -7,8 +7,9 @@ interface Props {
 const CreateTicket = ({ onSubmit }: Props) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  // Set default states for quicker testing
   const [type, setType] = useState("Epic");
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState("Open");
 
   const handleSubmit = () => {
     const ticketType = type as TicketType;

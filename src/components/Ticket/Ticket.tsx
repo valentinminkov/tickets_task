@@ -6,14 +6,15 @@ import DetailedTicket from "../DetailedTicket/DetailedTicket";
 interface Props {
   ticket: TicketProp;
   isExpanded?: boolean;
+  onChangeStatus: (tickedId: Number, currentStatus: String) => void;
 }
 
-export default function Ticket({ ticket, isExpanded }: Props) {
+export default function Ticket({ ticket, isExpanded, onChangeStatus }: Props) {
   return (
     <>
       {isExpanded ? (
         <div>
-          <DetailedTicket ticket={ticket} />
+          <DetailedTicket onChangeStatus={onChangeStatus} ticket={ticket} />
         </div>
       ) : (
         <div className="overview-ticket-container">

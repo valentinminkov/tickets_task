@@ -6,4 +6,11 @@
     background-color: cadetblue;
     margin: 0 auto;
     margin-top: 10px;
+    
+    .status-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+    }
 }
