@@ -5,22 +5,18 @@ import DetailedTicket from "../DetailedTicket/DetailedTicket";
 
 interface Props {
   ticket: TicketProp;
+  isExpanded?: boolean;
 }
 
-export default function Ticket({ ticket }: Props) {
-  const [isExpanded, setIsExpanded] = useState(false);
-
+export default function Ticket({ ticket, isExpanded }: Props) {
   return (
     <>
       {isExpanded ? (
-        <div onClick={() => setIsExpanded(!isExpanded)}>
+        <div>
           <DetailedTicket ticket={ticket} />
         </div>
       ) : (
-        <div
-          className="overview-ticket-container"
-          onClick={() => setIsExpanded(!isExpanded)}
-        >
+        <div className="overview-ticket-container">
           <div>
             <h1>{ticket.title}</h1>
             <span> {ticket.status} </span>

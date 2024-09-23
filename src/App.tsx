@@ -30,9 +30,9 @@ function App() {
   const [ticketsData, setTicketsData] = useState<TicketProp[]>([]);
   const [ticketTypes, setTicketTypes] = useState<TicketObj[]>([]);
   const [isNewTicketCreated, setIsNewTicketCreated] = useState<Boolean>(false);
+  const [expandedTicketId, setExpandedTicketId] = useState<Number>(-1);
 
   useEffect(() => {
-    console.log("here");
     const fetchTicketsData = async () => {
       const ticketsData = await getMockTicketsData();
       const ticketTypes = await getMockTicketTypesData();
@@ -50,12 +50,10 @@ function App() {
 
   const onNewTicketSubmit = async (newTicket: TicketProp) => {
     const newTicketData = await createNewTicket(newTicket);
-    console.log(newTicketData, "new ticket");
     const allTickets = JSON.parse(JSON.stringify(ticketsData));
 
     allTickets.push(formatTicket(newTicketData, ticketTypes));
 
-    console.log("add new tickets", allTickets);
     setTicketsData(allTickets);
     setFullTicketsData(allTickets);
     setIsNewTicketCreated(false);
@@ -109,9 +107,14 @@ function App() {
           <div>
             <h1 style={{ color: "magenta" }}> {ticketsData.length} tickets </h1>
             {ticketsData.map((ticket) => (
-              <Ticket ticket={ticket} />
+              <div onClick={() => ticket.id && setExpandedTicketId(ticket.id)}>
+                <Ticket
+                  ticket={ticket}
+                  isExpanded={expandedTicketId === ticket.id}
+                />
+              </div>
             ))}
-            <section></section>
+            ;<section></section>
           </div>
         </>
       )}
