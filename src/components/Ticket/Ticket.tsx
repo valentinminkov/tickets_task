@@ -19,7 +19,10 @@ export default function Ticket({ ticket, isExpanded, onChangeStatus }: Props) {
       ) : (
         <div className="overview-ticket-container">
           <div>
-            <h1>{ticket.title}</h1>
+            <h1>
+              {ticket.id && <span>({ticket.id.toString()})</span>}{" "}
+              {ticket.title}
+            </h1>
             <span> {ticket.status} </span>
             <span> {ticket.type} </span>
           </div>

@@ -13,9 +13,11 @@ export default function DetailedTicket({ ticket, onChangeStatus }: Props) {
         <h1>{ticket.title}</h1>
         <div className="status-container">
           <span>
-            <b>status:</b> {ticket.status}
+            <b>Status</b>
+            <br />
+            {ticket.status}
           </span>
-
+          <br />
           <button
             onClick={() => {
               if (!ticket.id || !ticket.status) return;
@@ -27,9 +29,12 @@ export default function DetailedTicket({ ticket, onChangeStatus }: Props) {
         </div>
         <br />
         <span>
-          <b>type: </b> {ticket.type}{" "}
+          <b>Type</b>
+          <br />
+          {ticket.type}{" "}
         </span>
       </div>
+      <br />
       <div style={{ display: "flex", flexDirection: "column" }}>
         <b>Description</b>
         <p>{ticket.desc}</p>

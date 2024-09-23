@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import logo from "./logo.svg";
 import CreateTicket from "./components/CreateTicket/CreateTicket";
 import {
   createNewTicket,
@@ -124,12 +123,6 @@ function App() {
 
   return (
     <div className="App">
-      <div>
-        Ticket types
-        <button onClick={() => filterTicketsByType("Epic")}>Epic</button>
-        <button onClick={() => filterTicketsByType("Story")}>Story</button>
-        <button onClick={() => filterTicketsByType("All")}>All</button>
-      </div>
       {isNewTicketCreated && <CreateTicket onSubmit={onNewTicketSubmit} />}
       {!isNewTicketCreated && (
         <>
@@ -143,6 +136,15 @@ function App() {
           </div>
           <div>
             <h1 style={{ color: "magenta" }}> {ticketsData.length} tickets </h1>
+            <div className="app-header">
+              <span className="app-header-label">Ticket types</span>
+              <button onClick={() => filterTicketsByType("Epic")}>Epic</button>
+              <button onClick={() => filterTicketsByType("Story")}>
+                Story
+              </button>
+              <button onClick={() => filterTicketsByType("All")}>All</button>
+            </div>
+
             {ticketsData.map((ticket) => (
               <div
                 key={ticket.id?.toString()}
