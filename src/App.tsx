@@ -67,7 +67,6 @@ function App() {
   };
 
   const formatTicket = (ticket: TicketsData, ticketTypes: any) => {
-    console.log(ticket);
     return {
       id: ticket.id,
       title: ticket.title,
