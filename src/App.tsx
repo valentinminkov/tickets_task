@@ -114,7 +114,6 @@ function App() {
                 />
               </div>
             ))}
-            ;<section></section>
           </div>
         </>
       )}
