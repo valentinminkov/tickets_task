@@ -1,0 +1,7 @@
+.overview-ticket-container {
+    background-color: green;
+    cursor: pointer;
+    &:hover{
+        background-color: red;;
+    }
+}
